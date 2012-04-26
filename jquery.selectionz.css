@@ -1,0 +1,62 @@
+/*!
+ * jQuery Selectionz Theme file
+ * 
+ */
+
+.selectionz {
+    font-size:11px;
+    position: relative;
+    z-index:1;
+}
+    .sz-toggle {
+        background:#fff;
+        border:1px solid #ddd;
+        cursor:default;
+        margin:0;
+        padding:2px 5px;
+        position: relative;
+        width:210px;
+        z-index:1;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+    }
+    .sz-toggle .arrow {
+        background: #444;
+        display:inline-block;
+        float:right;
+        height:11px;
+        margin-left:5px;
+        position: relative;
+        top:2px;
+        width:10px;
+
+        overflow: hidden;
+        text-indent:100%;
+        white-space: nowrap;
+    }
+    .sz-options-outer {
+        z-index:5;
+    }
+        .sz-options {
+            background:#fff;
+            border:1px solid #ddd;
+            border-top:0;
+            position: relative;
+            z-index:5;
+            border-bottom-left-radius:3px;
+            border-bottom-right-radius:3px;
+        }
+            .sz-options li {
+                cursor:default;
+                padding:3px 10px;
+                position: relative;
+                z-index:5;
+            }
+            .sz-options li.current, .sz-options li:hover {
+                background:#f1f1f1;
+            }
+
+::selection {
+    background:transparent;
+}

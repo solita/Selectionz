@@ -35,7 +35,10 @@
             function hookEvents() {
                 // events
                 toggle.click(function () {
-                    options_list.toggle();
+                    options_outer.css({
+                        //zIndex: 100
+                    });
+                    options_outer.toggle();
                 });
                 
                 options.click(function () {
@@ -47,7 +50,7 @@
                     var new_current = orig_options.filter('[value="' + value + '"]');
                     setCurrent(new_current);
 
-                    options_list.hide();
+                    options_outer.hide();
                 });
 
                 $select.bind('change', function (event) {
@@ -55,6 +58,14 @@
 
                     var new_current = orig_options.filter('[value="' + value + '"]');
                     setCurrent(new_current);
+                });
+
+                sel_el.click(function (e) {
+                    e.stopPropagation();
+                });
+
+                $('html').click(function (e) {
+                    options_outer.hide();
                 });
             }
 
@@ -77,11 +88,11 @@
                 options_outer.append(options_list);
 
                 options_outer.css({
+                    display: 'none',
                     position: 'absolute'
                 });
 
                 options_list.css({
-                    display: 'none',
                     listStyle: 'none',
                     margin: 0,
                     padding: 0
@@ -107,7 +118,10 @@
                 
                 $select.after(sel_el);
 
-                options_outer.css('top', label.height());
+                options_outer.css({
+                    top: toggle.outerHeight(),
+                    minWidth: toggle.outerWidth()
+                });
             }
 
             function setCurrent(new_current) {
