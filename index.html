@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>jQuery Selectionz</title>
+
+    <style type="text/css">
+
+    </style>
+</head>
+<body>
+
+    <div>
+        First:
+        <select name="yay" class="example">
+            <option value="yksi">Yksi</option>
+            <option value="kaksi">Kaksi</option>
+            <option value="kolme">Kolme</option>
+            <option value="nelja">Neljä</option>
+        </select>
+    </div>
+
+    <div>
+        Second:
+        <select name="yay" class="example">
+            <option value="yksi">Yksi</option>
+            <option value="kaksi">Kaksi</option>
+            <option value="kolme">Kolme</option>
+            <option value="nelja">Neljä</option>
+        </select>
+    </div>
+
+    <div>
+        Different default:
+        <select name="yay" class="example">
+            <option value="yksi">Yksi</option>
+            <option value="kaksi" selected="selected">Kaksi</option>
+            <option value="kolme">Kolme</option>
+            <option value="nelja">Neljä</option>
+        </select>
+    </div>
+
+    <div>
+        In-correct "selected" syntax:
+        <select name="yay" class="example">
+            <option value="yksi">Yksi</option>
+            <option value="kaksi">Kaksi</option>
+            <option value="kolme" selected="true">Kolme</option>
+            <option value="nelja">Neljä</option>
+        </select>
+    </div>
+
+    <div>
+        In-correct "selected" syntax, part 2:
+        <select name="yay" class="example">
+            <option value="yksi">Yksi</option>
+            <option value="kaksi">Kaksi</option>
+            <option value="kolme">Kolme</option>
+            <option value="nelja" selected>Neljä</option>
+        </select>
+    </div>
+    
+    <div>
+        Should not be changed:
+        <select name="yay">
+            <option value="yksi">Yksi</option>
+            <option value="kaksi">Kaksi</option>
+            <option value="kolme">Kolme</option>
+            <option value="nelja">Neljä</option>
+        </select>
+    </div>
+
+<!--
+    <div>
+        Slide in:
+        <select name="yay" class="slide-example">
+            <option value="yksi">Yksi</option>
+            <option value="kaksi">Kaksi</option>
+            <option value="kolme">Kolme</option>
+            <option value="nelja">Neljä</option>
+        </select>
+    </div>
+-->
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript" src="jquery.selectionz.js"></script>
+<script type="text/javascript">
+
+var examples = $('.example');
+
+examples.selectionz();
+
+var disableSync = false;
+
+examples.bind('change', function () {
+    if (disableSync) return;
+
+    disableSync = true;
+
+    var value = $(this).val();
+    examples.not(this).val(value).change();
+
+    disableSync = false;
+});
+
+$('.slide-example').selectionz({
+    onShowOptions: function () {
+
+    }
+});
+
+</script>
+
+</body>
+</html>
