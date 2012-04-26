@@ -1,5 +1,5 @@
 /*!
- * jQuery Selectionz - version 0.1
+ * jQuery Selectionz - version 0.2
  * Copyright (c) 2011 Antti-Jussi Kovalainen (ajk.im)
  */
 
@@ -46,6 +46,8 @@
                     
                     var new_current = orig_options.filter('[value="' + value + '"]');
                     setCurrent(new_current);
+
+                    options_list.hide();
                 });
 
                 $select.bind('change', function (event) {
@@ -85,6 +87,7 @@
                     padding: 0
                 });
 
+                // populate our custom options -list
                 $select.find('option').each(function () {
                     var $this = $(this),
                         value = $this.attr('value'),
@@ -108,8 +111,6 @@
             }
 
             function setCurrent(new_current) {
-                console.log(new_current);
-
                 if (!new_current) return;
 
                 current = new_current;
