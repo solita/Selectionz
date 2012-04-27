@@ -1,6 +1,6 @@
 /*!
  * jQuery Selectionz - version 0.2
- * Copyright (c) 2011 Antti-Jussi Kovalainen (ajk.im)
+ * Copyright (c) 2012 Antti-Jussi Kovalainen (ajk.im)
  */
 
 ;(function ($, window, document, undefined) {
