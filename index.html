@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>jQuery Selectionz</title>
+    <title>jQuery Selectionz Examples</title>
 
     <style type="text/css">
         body {
@@ -10,7 +10,10 @@
             margin:50px auto;
             width:800px;
         }
-        div {
+        h1 {
+            margin:0 0 30px;
+        }
+        body > div {
             margin:0 0 15px;
         }
     </style>
@@ -19,6 +22,7 @@
 
 </head>
 <body>
+    <h1>jQuery Selectionz Examples</h1>
 
     <div>
         First:
@@ -67,12 +71,25 @@
             <option value="kaksi">Kaksi</option>
             <option value="kolme">Kolme</option>
             <option value="nelja" selected>Neljä</option>
+            <option value="viisi">Viides, ei ole muualla</option>
+            <option value="kuus">Kuudes jo!</option>
+            <option value="huh">No huh huh</option>
         </select>
     </div>
     
     <div>
         Should not be changed:
         <select name="yay">
+            <option value="yksi">Yksi</option>
+            <option value="kaksi">Kaksi</option>
+            <option value="kolme">Kolme</option>
+            <option value="nelja">Neljä</option>
+        </select>
+    </div>
+
+    <div>
+        Not synced:
+        <select name="yay" class="example2">
             <option value="yksi">Yksi</option>
             <option value="kaksi">Kaksi</option>
             <option value="kolme">Kolme</option>
@@ -92,32 +109,15 @@
     </div>
 -->
 
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript" src="jquery.min.js"></script>
 <script type="text/javascript" src="jquery.selectionz.js"></script>
 <script type="text/javascript">
 
 var examples = $('.example');
-
 examples.selectionz();
+examples.syncSelections();
 
-var disableSync = false;
-
-examples.bind('change', function () {
-    if (disableSync) return;
-
-    disableSync = true;
-
-    var value = $(this).val();
-    examples.not(this).val(value).change();
-
-    disableSync = false;
-});
-
-$('.slide-example').selectionz({
-    onShowOptions: function () {
-
-    }
-});
+$('.example2').selectionz()
 
 </script>
 

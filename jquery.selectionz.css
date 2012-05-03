@@ -1,22 +1,25 @@
-/*!
- * jQuery Selectionz Theme file
- * 
- */
+* { margin:0; padding:0; }
 
+/* jQuery Selectionz Theme 
+----------------------------------------------------------------------------- */
 .selectionz {
     font-size:11px;
     position: relative;
     z-index:1;
 }
+.selectionz:focus {
+    outline:0;
+}
     .sz-toggle {
         background:#fff;
         border:1px solid #ddd;
         cursor:default;
-        margin:0;
+        display:inline-block;
         padding:2px 5px;
         position: relative;
         width:210px;
         z-index:1;
+
         -webkit-border-radius: 3px;
         -moz-border-radius: 3px;
         border-radius: 3px;
@@ -36,6 +39,7 @@
         white-space: nowrap;
     }
     .sz-options-outer {
+        position: relative;
         z-index:5;
     }
         .sz-options {
@@ -43,7 +47,7 @@
             border:1px solid #ddd;
             border-top:0;
             position: relative;
-            z-index:5;
+
             border-bottom-left-radius:3px;
             border-bottom-right-radius:3px;
         }
@@ -57,6 +61,6 @@
                 background:#f1f1f1;
             }
 
-::selection {
+.se_el ::selection {
     background:transparent;
 }
