@@ -68,7 +68,9 @@
                     openDropdown();
                 });
                 
-                options.click(function () {
+                /* Use mousedown for IE, because the element is hidden (because of 'blur') before click goes thru on IE */
+                //options.bind(($.browser.msie ? 'mousedown' : 'click'), function () {
+                options.bind('click', function () {
                     var $this = $(this);
                     var value = $this.attr('data-value');
 
@@ -92,7 +94,8 @@
                         sel_el.addClass('focus');
                     })
                     .bind('blur.selectionz', function () {
-                        closeDropdown();
+                        // set some delay for better UX! lol. also, to fix the "dumb" event order in IE
+                        setTimeout(function () { closeDropdown(); }, 100);
                         sel_el.removeClass('focus');
                     });
             }
