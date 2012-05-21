@@ -1,5 +1,5 @@
 /*!
- * jQuery Selectionz v0.3
+ * jQuery Selectionz v0.3.1
  * Copyright (c) 2012 Antti-Jussi Kovalainen (ajk.im)
  */
 
@@ -7,8 +7,6 @@
 
     var allSelects = [];
     var dropdown = $('<div id="sz-dropdown" />');
-
-    $('body').append(dropdown);
 
     function showDropdown(x, y, min_width, options) {
         dropdown.css({
@@ -28,11 +26,16 @@
         dropdown.hide().empty();
     }
 
+    $(document).ready(function () {
+        $('body').append(dropdown);
+    });
+
     $(document).click(function () {
         $('.selectionz').removeClass('open');
         hideDropdown();
     });
 
+    // main
     $.fn.selectionz = function (options_in) {
         return this.each(function () {
 
@@ -275,7 +278,7 @@
                 var value = $(this).val();
                 all.not(this).each(function () {
                     var $this = $(this);
-                    if ($this.find('option[value="' + value + '"]').length) {
+                    if ($this.find('option[value="' + value + '"]').length !== 0) {
                         $this.val(value).change();
                     }
                 });
