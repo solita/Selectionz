@@ -38,28 +38,30 @@
         text-indent:100%;
         white-space: nowrap;
     }
-    .sz-options-outer {
+.sz-options-outer {
+    position: relative;
+    z-index:5;
+}
+    .sz-options {
+        background:#fff;
+        border:1px solid #ddd;
+        border-top:0;
+        font-size:11px;
+        list-style:none;
         position: relative;
-        z-index:5;
-    }
-        .sz-options {
-            background:#fff;
-            border:1px solid #ddd;
-            border-top:0;
-            position: relative;
 
-            border-bottom-left-radius:3px;
-            border-bottom-right-radius:3px;
+        border-bottom-left-radius:3px;
+        border-bottom-right-radius:3px;
+    }
+        .sz-options li {
+            cursor:default;
+            padding:3px 10px;
+            position: relative;
+            z-index:5;
         }
-            .sz-options li {
-                cursor:default;
-                padding:3px 10px;
-                position: relative;
-                z-index:5;
-            }
-            .sz-options li.current, .sz-options li:hover {
-                background:#f1f1f1;
-            }
+        .sz-options li.current, .sz-options li:hover {
+            background:#f1f1f1;
+        }
 
 .se_el ::selection {
     background:transparent;

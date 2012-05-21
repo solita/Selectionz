@@ -1,26 +1,64 @@
 /*!
- * jQuery Selectionz v0.2
+ * jQuery Selectionz v0.3
  * Copyright (c) 2012 Antti-Jussi Kovalainen (ajk.im)
  */
 
 ;(function ($, window, document, undefined) {
 
-    $.fn.selectionz = function () {
-        var allSelects = [];
+    var allSelects = [];
+    var dropdown = $('<div id="sz-dropdown" />');
 
+    $('body').append(dropdown);
+
+    function showDropdown(x, y, min_width, options) {
+        dropdown.css({
+            position: 'absolute',
+            left: x,
+            top: y,
+            visibility: 'visible',
+            minWidth: min_width,
+            zIndex: 10000
+        });
+
+        dropdown.html(options).show();
+        return options;
+    }
+
+    function hideDropdown() {
+        dropdown.hide().empty();
+    }
+
+    $(document).click(function () {
+        $('.selectionz').removeClass('open');
+        hideDropdown();
+    });
+
+    $.fn.selectionz = function (options_in) {
         return this.each(function () {
 
-            var $select = $(this);
+            var element = $(this);
+            if (element.is('select') === true) {
+                styleSelect(element);
+            }
+            else if (element.is('input[type=checkbox]') === true) {
+                styleCheckbox(element, options_in);
+            }
+            else if (element.is('label') === true) {
+                styleCheckbox(element, options_in);
+            }
+            else {
+                return false;
+            }
+        });
 
-            if ($select.is('select') === false) return;
-
+        function styleSelect($select) {
             $select.hide();
 
             var orig_options = $select.children('option'),
                 options = null,
                 current = orig_options.filter('[selected]');
 
-            if (current.length == 0) {
+            if (current.length === 0) {
                 current = $select.find('option').first();
             }
 
@@ -40,15 +78,24 @@
             var zindex = 1;
 
             function openDropdown() {
-                options_outer.toggle()
+                //options_outer.toggle();
                 sel_el.toggleClass('open');
 
                 if (sel_el.hasClass('open')) {
                     // store old z-index
-                    zindex = sel_el.css('z-index');
+                    //zindex = sel_el.css('z-index');
 
                     // set crazy high z-index so other selectionz don't get in the way
-                    sel_el.css('z-index', 1000);
+                    //sel_el.css('z-index', 1000);
+
+                    var pos = sel_el.offset(),
+                        x = pos.left,
+                        y = pos.top;
+                    var min_width = toggle.outerWidth();
+
+                    options_outer = showDropdown(x, y, min_width, options_outer);
+                    options_outer.toggleClass('open');
+                    bindOptions( options_outer.find('> ul > li') );
                 }
                 else {
                     closeDropdown();
@@ -56,30 +103,15 @@
             }
 
             function closeDropdown() {
-                options_outer.hide();
-
                 sel_el.removeClass('open');
-                sel_el.css('z-index', zindex);
+                hideDropdown();
             }
 
             function hookEvents() {
                 // events
                 toggle.click(function (e) {
                     openDropdown();
-                });
-                
-                /* Use mousedown for IE, because the element is hidden (because of 'blur') before click goes thru on IE */
-                //options.bind(($.browser.msie ? 'mousedown' : 'click'), function () {
-                options.bind('click', function () {
-                    var $this = $(this);
-                    var value = $this.attr('data-value');
-
-                    $select.val(value).change();
-                    
-                    var new_current = orig_options.filter('[value="' + value + '"]');
-                    setCurrent(new_current);
-
-                    closeDropdown();
+                    e.stopPropagation();
                 });
 
                 $select.bind('change', function (event) {
@@ -95,9 +127,23 @@
                     })
                     .bind('blur.selectionz', function () {
                         // set some delay for better UX! lol. also, to fix the "dumb" event order in IE
-                        setTimeout(function () { closeDropdown(); }, 100);
                         sel_el.removeClass('focus');
                     });
+            }
+
+            function bindOptions(options) {
+                /* Use mousedown for IE, because the element is hidden (because of 'blur') before click goes thru on IE */
+                options.unbind(($.browser.msie ? 'mousedown' : 'click')).bind(($.browser.msie ? 'mousedown' : 'click'), function () {
+                    var $this = $(this);
+                    var value = $this.attr('data-value');
+
+                    $select.val(value).change();
+                    
+                    var new_current = orig_options.filter('[value="' + value + '"]');
+                    setCurrent(new_current);
+
+                    closeDropdown();
+                });
             }
 
             function createElements() {
@@ -113,20 +159,6 @@
 
                 toggle.css({
                     display: 'inline-block'
-                });                
-
-                // options container
-                options_outer.append(options_list);
-
-                options_outer.css({
-                    display: 'none',
-                    position: 'absolute'
-                });
-
-                options_list.css({
-                    listStyle: 'none',
-                    margin: 0,
-                    padding: 0
                 });
 
                 // populate our custom options -list
@@ -140,16 +172,18 @@
                 });
 
                 options = options_list.children();
-
                 setCurrent(current);
+
+                // options container
+                options_outer.append(options_list);
 
                 // append to DOM
                 sel_el.append(toggle);
-                sel_el.append(options_outer);
                 
                 $select.after(sel_el);
 
                 options_outer.css({
+                    position: 'absolute',
                     top: toggle.outerHeight(),
                     minWidth: toggle.outerWidth()
                 });
@@ -168,7 +202,58 @@
                 options.filter('[data-value="' + value + '"]').addClass('current');
             }
 
-        });
+        } /* styleSelect() */
+
+
+        /*
+         * Helps you style checkboxes. Adds a c_on class to the label when checkbox is checked
+         * Note: Checkboxes must be inside a <label> !
+         */
+        function styleCheckbox(element, options_in) {
+            var options = {
+                className: 'c_on'
+            };
+
+            var $this = element,
+                label = null,
+                checkbox = null;
+
+            if ($this.is('label')) {
+                label = $this;
+                checkbox = label.find('[type=checkbox]');
+            }
+            else if ($this.is('input[type=checkbox]')) {
+                checkbox = $this;
+                label = checkbox.parent();
+
+                if (!label.is('label')) {
+                    // Checkbox must be inside a <label> !
+                    return;
+                }
+            }
+            else {
+                return;
+            }
+
+            if (!label || !checkbox || !label.length || !checkbox.length) {
+                return;
+            }
+
+            function setClass() {
+                if (checkbox.is(':checked')) {
+                    label.addClass(options.className);
+                }
+                else {
+                    label.removeClass(options.className);
+                }
+            }
+
+            setClass();
+
+            checkbox.bind('change', function () {
+                setClass();
+            });
+        }
     };
 
     /* Extra: Sync selections
@@ -188,13 +273,16 @@
                 disableSync = true;
 
                 var value = $(this).val();
-                all.not(this).val(value).change();
+                all.not(this).each(function () {
+                    var $this = $(this);
+                    if ($this.find('option[value="' + value + '"]').length) {
+                        $this.val(value).change();
+                    }
+                });
 
                 disableSync = false;
             });
         });
     };
-
-
 
 })(jQuery, window, document);

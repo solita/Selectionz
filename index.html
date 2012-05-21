@@ -24,90 +24,110 @@
 <body>
     <h1>jQuery Selectionz Examples</h1>
 
-    <div>
-        First:
-        <select name="yay" class="example">
-            <option value="yksi">Yksi</option>
-            <option value="kaksi">Kaksi</option>
-            <option value="kolme">Kolme</option>
-            <option value="nelja">Neljä</option>
-        </select>
-    </div>
+    <div class="dropdowns">
+        <div>
+            First:
+            <select name="yay" class="example">
+                <option value="yksi">Yksi</option>
+                <option value="kaksi">Kaksi</option>
+                <option value="kolme">Kolme</option>
+                <option value="nelja">Neljä</option>
+            </select>
+        </div>
 
-    <div>
-        Second:
-        <select name="yay" class="example">
-            <option value="yksi">Yksi</option>
-            <option value="kaksi">Kaksi</option>
-            <option value="kolme">Kolme</option>
-            <option value="nelja">Neljä</option>
-        </select>
-    </div>
+        <div>
+            Second:
+            <select name="yay" class="example">
+                <option value="yksi">Yksi</option>
+                <option value="kaksi">Kaksi</option>
+                <option value="kolme">Kolme</option>
+                <option value="nelja">Neljä</option>
+            </select>
+        </div>
 
-    <div>
-        Different default:
-        <select name="yay" class="example">
-            <option value="yksi">Yksi</option>
-            <option value="kaksi" selected="selected">Kaksi</option>
-            <option value="kolme">Kolme</option>
-            <option value="nelja">Neljä</option>
-        </select>
-    </div>
+        <div>
+            Different default:
+            <select name="yay" class="example">
+                <option value="yksi">Yksi</option>
+                <option value="kaksi" selected="selected">Kaksi</option>
+                <option value="kolme">Kolme</option>
+                <option value="nelja">Neljä</option>
+            </select>
+        </div>
 
-    <div>
-        In-correct "selected" syntax:
-        <select name="yay" class="example">
-            <option value="yksi">Yksi</option>
-            <option value="kaksi">Kaksi</option>
-            <option value="kolme" selected="true">Kolme</option>
-            <option value="nelja">Neljä</option>
-        </select>
-    </div>
+        <div>
+            In-correct "selected" syntax:
+            <select name="yay" class="example">
+                <option value="yksi">Yksi</option>
+                <option value="kaksi">Kaksi</option>
+                <option value="kolme" selected="true">Kolme</option>
+                <option value="nelja">Neljä</option>
+            </select>
+        </div>
 
-    <div>
-        In-correct "selected" syntax, part 2:
-        <select name="yay" class="example">
-            <option value="yksi">Yksi</option>
-            <option value="kaksi">Kaksi</option>
-            <option value="kolme">Kolme</option>
-            <option value="nelja" selected>Neljä</option>
-            <option value="viisi">Viides, ei ole muualla</option>
-            <option value="kuus">Kuudes jo!</option>
-            <option value="huh">No huh huh</option>
-        </select>
-    </div>
-    
-    <div>
-        Should not be changed:
-        <select name="yay">
-            <option value="yksi">Yksi</option>
-            <option value="kaksi">Kaksi</option>
-            <option value="kolme">Kolme</option>
-            <option value="nelja">Neljä</option>
-        </select>
-    </div>
+        <div>
+            In-correct "selected" syntax, part 2:
+            <select name="yay" class="example">
+                <option value="yksi">Yksi</option>
+                <option value="kaksi">Kaksi</option>
+                <option value="kolme">Kolme</option>
+                <option value="nelja" selected>Neljä</option>
+                <option value="viisi">Viides, ei ole muualla</option>
+                <option value="kuus">Kuudes jo!</option>cm
+                <option value="huh">No huh huh</option>
+            </select>
+        </div>
+        
+        <div>
+            Should not be changed:
+            <select name="yay">
+                <option value="yksi">Yksi</option>
+                <option value="kaksi">Kaksi</option>
+                <option value="kolme">Kolme</option>
+                <option value="nelja">Neljä</option>
+            </select>
+        </div>
 
-    <div>
-        Not synced:
-        <select name="yay" class="example2">
-            <option value="yksi">Yksi</option>
-            <option value="kaksi">Kaksi</option>
-            <option value="kolme">Kolme</option>
-            <option value="nelja">Neljä</option>
-        </select>
-    </div>
+        <div>
+            Not synced:
+            <select name="yay" class="example2">
+                <option value="yksi">Yksi</option>
+                <option value="kaksi">Kaksi</option>
+                <option value="kolme">Kolme</option>
+                <option value="nelja">Neljä</option>
+            </select>
+        </div>
 
-<!--
+        <div style="background:#f1f1f1; padding:10px; overflow:hidden;">
+            <select class="example2">
+                <option value="test">Overflow hidden</option>
+            </select>
+        </div>
+
+    <!--
+        <div>
+            Slide in:
+            <select name="yay" class="slide-example">
+                <option value="yksi">Yksi</option>
+                <option value="kaksi">Kaksi</option>
+                <option value="kolme">Kolme</option>
+                <option value="nelja">Neljä</option>
+            </select>
+        </div>
+    -->
+</div>
+<div class="checks-radios">
     <div>
-        Slide in:
-        <select name="yay" class="slide-example">
-            <option value="yksi">Yksi</option>
-            <option value="kaksi">Kaksi</option>
-            <option value="kolme">Kolme</option>
-            <option value="nelja">Neljä</option>
-        </select>
+        <input id="check-1" type="checkbox" value="1" />
+        <label for="check-1">Chekcboxin</label>
     </div>
--->
+    <div>
+        <label id="label-1">
+            <input type="checkbox" /> It's a checkbox
+        </label>
+    </div>
+</div>
+
 
 <script type="text/javascript" src="jquery.min.js"></script>
 <script type="text/javascript" src="jquery.selectionz.js"></script>
@@ -118,6 +138,9 @@ examples.selectionz();
 examples.syncSelections();
 
 $('.example2').selectionz()
+
+$('#check-1').selectionz();
+$('#label-1').selectionz();
 
 </script>
 
