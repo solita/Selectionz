@@ -35,7 +35,7 @@
         hideDropdown();
     });
 
-    // main
+
     $.fn.selectionz = function (options_in) {
         return this.each(function () {
 
