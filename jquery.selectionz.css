@@ -1,7 +1,15 @@
-* { margin:0; padding:0; }
 
-/* jQuery Selectionz Theme 
+/* jQuery Selectionz Theme
 ----------------------------------------------------------------------------- */
+/* REQUIRED: */
+#sz-dropdown {
+    z-index:10000;
+}
+.selectionz.open {
+    z-index:10001;
+}
+
+/* dropdown */
 .selectionz {
     font-size:11px;
     position: relative;
@@ -9,52 +17,59 @@
 }
 .selectionz:focus {
     outline:0;
+    border-color:#222;
 }
     .sz-toggle {
-        background:#fff;
-        border:1px solid #ddd;
+        background-image: linear-gradient(bottom, rgb(255,255,255) 0%, rgb(240,240,240) 34%, rgb(255,255,255) 64%);
+        background-image: -o-linear-gradient(bottom, rgb(255,255,255) 0%, rgb(240,240,240) 34%, rgb(255,255,255) 64%);
+        background-image: -moz-linear-gradient(bottom, rgb(255,255,255) 0%, rgb(240,240,240) 34%, rgb(255,255,255) 64%);
+        background-image: -webkit-linear-gradient(bottom, rgb(255,255,255) 0%, rgb(240,240,240) 34%, rgb(255,255,255) 64%);
+        background-image: -ms-linear-gradient(bottom, rgb(255,255,255) 0%, rgb(240,240,240) 34%, rgb(255,255,255) 64%);
+        border:1px solid #a6a6a6;
         cursor:default;
         display:inline-block;
-        padding:2px 5px;
+        padding:4px 35px 4px 10px;
         position: relative;
-        width:210px;
+        min-width:100px;
         z-index:1;
 
         -webkit-border-radius: 3px;
         -moz-border-radius: 3px;
         border-radius: 3px;
     }
-    .sz-toggle .arrow {
-        background: #444;
-        display:inline-block;
-        float:right;
-        height:11px;
-        margin-left:5px;
-        position: relative;
-        top:2px;
-        width:10px;
-
-        overflow: hidden;
-        text-indent:100%;
-        white-space: nowrap;
+    .open .sz-toggle {
+        background:#fff;
     }
+        .arrow {
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top: 4px solid #aaa;
+            position: absolute;
+            right:10px;
+            top: 10px;
+        }
+        .sz-toggle:hover .arrow {
+            border-top-color:#333;
+        }
 .sz-options-outer {
     position: relative;
     z-index:5;
 }
     .sz-options {
         background:#fff;
-        border:1px solid #ddd;
-        border-top:0;
+        border:1px solid #aaa;
         font-size:11px;
         list-style:none;
         position: relative;
+        margin-top:-1px;
 
         border-bottom-left-radius:3px;
         border-bottom-right-radius:3px;
+        box-shadow:0 4px 15px rgba(0,0,0, 0.4);
     }
         .sz-options li {
             cursor:default;
+            display:block;
             padding:3px 10px;
             position: relative;
             z-index:5;
@@ -63,6 +78,19 @@
             background:#f1f1f1;
         }
 
-.se_el ::selection {
+.sel_el ::selection {
     background:transparent;
+}
+
+
+/* checkboxes & radios */
+.sz-control {
+    background:#ddd;
+    border:1px solid #888;
+    display:inline-block;
+    padding:2px 4px;
+    border-radius:4px;
+}
+.sz-control.c_on {
+    background:#fff;
 }

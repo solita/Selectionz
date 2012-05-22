@@ -6,6 +6,7 @@
 ;(function ($, window, document, undefined) {
 
     var allSelects = [];
+    var radios = {};
     var dropdown = $('<div id="sz-dropdown" />');
 
     function showDropdown(x, y, min_width, options) {
@@ -14,8 +15,7 @@
             left: x,
             top: y,
             visibility: 'visible',
-            minWidth: min_width,
-            zIndex: 10000
+            minWidth: min_width
         });
 
         dropdown.html(options).show();
@@ -89,11 +89,11 @@
                     //zindex = sel_el.css('z-index');
 
                     // set crazy high z-index so other selectionz don't get in the way
-                    //sel_el.css('z-index', 1000);
+                    //sel_el.css('z-index', 10001);
 
-                    var pos = sel_el.offset(),
-                        x = pos.left,
-                        y = pos.top;
+                    var pos = sel_el.offset();
+                    var x = pos.left;
+                    var y = pos.top + toggle.outerHeight();
                     var min_width = toggle.outerWidth();
 
                     options_outer = showDropdown(x, y, min_width, options_outer);
@@ -107,6 +107,7 @@
 
             function closeDropdown() {
                 sel_el.removeClass('open');
+                sel_el.css('z-index', zindex);
                 hideDropdown();
             }
 
@@ -158,7 +159,7 @@
 
                 toggle
                     .append(label)
-                    .append(' <span class="arrow">Show/hide</span>');
+                    .append(' <span class="arrow"></span>');
 
                 toggle.css({
                     display: 'inline-block'
@@ -186,8 +187,6 @@
                 $select.after(sel_el);
 
                 options_outer.css({
-                    position: 'absolute',
-                    top: toggle.outerHeight(),
                     minWidth: toggle.outerWidth()
                 });
             }
@@ -209,28 +208,30 @@
 
 
         /*
-         * Helps you style checkboxes. Adds a c_on class to the label when checkbox is checked
-         * Note: Checkboxes must be inside a <label> !
+         * Helps you style checkboxes and radios. Adds a c_on class to the label when checkbox/radio is checked
+         * Note: Checkboxes and radios must be inside a <label> !
          */
         function styleCheckbox(element, options_in) {
-            var options = {
-                className: 'c_on'
-            };
+            var options = $.extend({
+                hideControl: false, // hides the control or radio control
+                className: 'sz-control',
+                classNameChecked: 'c_on'
+            }, options_in);
 
-            var $this = element,
-                label = null,
-                checkbox = null;
+            var $this = element;
+            var label = null;
+            var control = null;
 
             if ($this.is('label')) {
                 label = $this;
-                checkbox = label.find('[type=checkbox]');
+                control = label.find('[type=checkbox], [type=radio]');
             }
-            else if ($this.is('input[type=checkbox]')) {
-                checkbox = $this;
-                label = checkbox.parent();
+            else if ($this.is('[type=checkbox], [type=radio]')) {
+                control = $this;
+                label = control.parent();
 
                 if (!label.is('label')) {
-                    // Checkbox must be inside a <label> !
+                    // control must be inside a <label> !
                     return;
                 }
             }
@@ -238,22 +239,55 @@
                 return;
             }
 
-            if (!label || !checkbox || !label.length || !checkbox.length) {
+            if (!label || !control || !label.length || !control.length) {
+                // this is bat country!
                 return;
             }
 
+            label.addClass(options.className);
+
+            if (options.hideControl) {
+                //control.css({
+
+                //});
+            }
+
+            // radio button specific stuff!
+            var isRadio = false;
+            if (control.is('[type=radio]') === true) {
+                isRadio = true; // on se radio!
+            }
+
+            if (isRadio) {
+                var name = control.attr('name');
+                if (name !== undefined) {
+                    radios[name] = radios[name] || [];
+                    radios[name].push(control);
+                }
+            }
+
             function setClass() {
-                if (checkbox.is(':checked')) {
-                    label.addClass(options.className);
+                if (isRadio) {
+                    var name = control.attr('name');
+                    if (name !== undefined) {
+                        var tmp_radios = radios[name];
+                        for (var i = 0; i < tmp_radios.length; i++) {
+                            tmp_radios[i].parent('label').removeClass(options.classNameChecked);
+                        }
+                    }
+                }
+
+                if (control.is(':checked')) {
+                    label.addClass(options.classNameChecked);
                 }
                 else {
-                    label.removeClass(options.className);
+                    label.removeClass(options.classNameChecked);
                 }
             }
 
             setClass();
 
-            checkbox.bind('change', function () {
+            control.bind('change', function () {
                 setClass();
             });
         }

@@ -5,16 +5,44 @@
     <title>jQuery Selectionz Examples</title>
 
     <style type="text/css">
+        * { margin:0; padding:0; outline:0; }
         body {
-            font:16px/1.5 sans-serif;
-            margin:50px auto;
+            font:13px/1.4 'Helvetica Neue', sans-serif;
+            margin:10px auto;
             width:800px;
         }
         h1 {
-            margin:0 0 30px;
+            font-size:54px;
+            font-weight:700;
+            margin:0 0 9px;
         }
-        body > div {
-            margin:0 0 15px;
+        h2, h3 {
+            margin:0 0 9px;
+        }
+        .lead {
+            font-size:20px;
+            font-weight:300;
+            margin-bottom:18px;
+        }
+        .dropdowns div {
+            margin:0 0 10px;
+        }
+        .checks-radios div {
+            margin:0 0 5px;
+        }
+        .col {
+            float:left;
+            margin:0 1%;
+            width:48%;
+        }
+
+        .wrap {
+            padding:10px;
+        }
+        .box {
+            background:#f5f5f5;
+            border:1px solid #e9e9e9;
+            border-radius:4px;
         }
     </style>
 
@@ -22,127 +50,144 @@
 
 </head>
 <body>
-    <h1>jQuery Selectionz Examples</h1>
-
-    <div class="dropdowns">
-        <div>
-            First:
-            <select name="yay" class="example">
-                <option value="yksi">Yksi</option>
-                <option value="kaksi">Kaksi</option>
-                <option value="kolme">Kolme</option>
-                <option value="nelja">Neljä</option>
-            </select>
-        </div>
-
-        <div>
-            Second:
-            <select name="yay" class="example">
-                <option value="yksi">Yksi</option>
-                <option value="kaksi">Kaksi</option>
-                <option value="kolme">Kolme</option>
-                <option value="nelja">Neljä</option>
-            </select>
-        </div>
-
-        <div>
-            Different default:
-            <select name="yay" class="example">
-                <option value="yksi">Yksi</option>
-                <option value="kaksi" selected="selected">Kaksi</option>
-                <option value="kolme">Kolme</option>
-                <option value="nelja">Neljä</option>
-            </select>
-        </div>
-
-        <div>
-            In-correct "selected" syntax:
-            <select name="yay" class="example">
-                <option value="yksi">Yksi</option>
-                <option value="kaksi">Kaksi</option>
-                <option value="kolme" selected="true">Kolme</option>
-                <option value="nelja">Neljä</option>
-            </select>
-        </div>
-
-        <div>
-            In-correct "selected" syntax, part 2:
-            <select name="yay" class="example">
-                <option value="yksi">Yksi</option>
-                <option value="kaksi">Kaksi</option>
-                <option value="kolme">Kolme</option>
-                <option value="nelja" selected>Neljä</option>
-                <option value="viisi">Viides, ei ole muualla</option>
-                <option value="kuus">Kuudes jo!</option>cm
-                <option value="huh">No huh huh</option>
-            </select>
-        </div>
-        
-        <div>
-            Should not be changed:
-            <select name="yay">
-                <option value="yksi">Yksi</option>
-                <option value="kaksi">Kaksi</option>
-                <option value="kolme">Kolme</option>
-                <option value="nelja">Neljä</option>
-            </select>
-        </div>
-
-        <div>
-            Not synced:
-            <select name="yay" class="example2">
-                <option value="yksi">Yksi</option>
-                <option value="kaksi">Kaksi</option>
-                <option value="kolme">Kolme</option>
-                <option value="nelja">Neljä</option>
-            </select>
-        </div>
-
-        <div style="background:#f1f1f1; padding:10px; overflow:hidden;">
-            <select class="example2">
-                <option value="test">Overflow hidden</option>
-            </select>
-        </div>
-
-    <!--
-        <div>
-            Slide in:
-            <select name="yay" class="slide-example">
-                <option value="yksi">Yksi</option>
-                <option value="kaksi">Kaksi</option>
-                <option value="kolme">Kolme</option>
-                <option value="nelja">Neljä</option>
-            </select>
-        </div>
-    -->
-</div>
-<div class="checks-radios">
-    <div>
-        <input id="check-1" type="checkbox" value="1" />
-        <label for="check-1">Chekcboxin</label>
+    <div class="wrap">
+        <h1>jQuery Selectionz Example</h1>
+        <p class="lead">An example page of some of the things Selectionz can do!</p>
     </div>
-    <div>
-        <label id="label-1">
-            <input type="checkbox" /> It's a checkbox
-        </label>
+
+    <div class="col dropdowns">
+        <div class="wrap box">
+
+            <h2>Dropdowns</h2>
+
+            <div>
+                <p>Look at dem styles:</p>
+                <select name="select-nosync" class="example2">
+                    <option value="One">Yarr!</option>
+                    <option value="Two">Ninjas</option>
+                    <option value="Three">Vikings</option>
+                </select>
+            </div>
+
+            <div>
+                <p>Unchanged:</p>
+                <select name="select">
+                    <option value="One">One</option>
+                    <option value="Two">Two</option>
+                    <option value="Three">Three</option>
+                    <option value="four">Quattro!</option>
+                </select>
+            </div>
+
+            <h3>Synchronized dropdowns</h3>
+
+            <div>
+                <p>Synced first:</p>
+                <select name="select-1" class="example">
+                    <option value="One">One</option>
+                    <option value="Two">Two</option>
+                    <option value="Three">Three</option>
+                    <option value="four">Quattro!</option>
+                </select>
+            </div>
+
+            <div>
+                <p>Synced third:</p>
+                <select name="select-2" class="example">
+                    <option value="One">One</option>
+                    <option value="Two">Two</option>
+                    <option value="Three">Three</option>
+                    <option value="four">Quattro!</option>
+                </select>
+            </div>
+
+            <div>
+                <p>Different default:</p>
+                <select name="select-3" class="example">
+                    <option value="One">One</option>
+                    <option value="Two" selected="selected">Two</option>
+                    <option value="Three">Three</option>
+                    <option value="four">Quattro!</option>
+                </select>
+            </div>
+
+            <div>
+                <p>In-correct "selected" syntax:</p>
+                <select name="select-4" class="example">
+                    <option value="One">One</option>
+                    <option value="Two">Two</option>
+                    <option value="Three" selected="true">Three</option>
+                    <option value="Four">Quattro!</option>
+                </select>
+            </div>
+
+            <div>
+                <p>Incorrect "selected" syntax, part 2:</p>
+                <select name="select-5" class="example">
+                    <option value="One">One</option>
+                    <option value="Two">Two</option>
+                    <option value="Three">Three</option>
+                    <option value="four" selected>Quattro!</option>
+                    <option value="5">This shouldn't be synced</option>
+                    <option value="6">These don't exists</option>
+                    <option value="huh">"No huh huh"</option>
+                </select>
+            </div>
+
+            <h3>Works with overflow:hidden;</h3>
+            <div style="background:#ddd; padding:10px; overflow:hidden;">
+                <select class="example2">
+                    <option value="test">Overflow hidden</option>
+                    <option value="test2">This should be visible</option>
+                    <option value="test3">Let's test if we...</option>
+                    <option value="test4">...can go overboard!</option>
+                    <option value="test5">Or over border?</option>
+                </select>
+            </div>
+        </div>
     </div>
-</div>
+    <!-- .dropdowns -->
 
+    <div class="col checks-radios">
+        <div class="wrap box">
 
-<script type="text/javascript" src="jquery.min.js"></script>
-<script type="text/javascript" src="jquery.selectionz.js"></script>
-<script type="text/javascript">
+            <h2>Checkboxes &amp; radiobuttons</h2>
 
-var examples = $('.example');
-examples.selectionz();
-examples.syncSelections();
+            <div>
+                <input id="check-1" type="checkbox" value="1" />
+                <label for="check-1">Non-styled checkbox</label>
+            </div>
+            <div>
+                <label id="label-1">
+                    <input type="checkbox" /> It's a checkbox
+                </label>
+            </div>
 
-$('.example2').selectionz()
+            <div>
+                <label class="radio">
+                    <input name="radios" type="radio" /> Radio ga ga
+                </label>
+                <label class="radio">
+                    <input name="radios" type="radio" /> Radio gu gu
+                </label>
+            </div>
+        </div>
+    </div>
 
-$('#check-1').selectionz();
-$('#label-1').selectionz();
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="jquery.selectionz.js"></script>
+    <script type="text/javascript">
 
-</script>
+        var examples = $('.example');
+        examples.selectionz();
+        examples.syncSelections();
+
+        $('.example2').selectionz()
+
+        $('#check-1').selectionz();
+        $('#label-1').selectionz();
+        $('.radio').selectionz();
+    </script>
 
 </body>
 </html>
