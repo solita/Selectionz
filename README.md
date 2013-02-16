@@ -6,6 +6,10 @@ radio button elements. It hooks into the &lt;select&rt; elements you choose,
 hides them and creates a bunch of HTML elements with descriptivie CSS classes,
 so you can style them and create any look you want!
 
+Selectionz alsos supports "syncing" of selection elements: if you have select
+boxes with the same elements, changing the selection will also change the
+selection on the other select box.
+
 See [examples.html](https://rawgithub.com/solita/Selectionz/master/index.html)
 for simple examples on how it works.
 
