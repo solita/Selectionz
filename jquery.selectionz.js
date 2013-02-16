@@ -46,6 +46,9 @@
             else if (element.is('input[type=checkbox]') === true) {
                 styleCheckbox(element, options_in);
             }
+            else if (element.is('input[type=radio]') === true) {
+                styleCheckbox(element, options_in);
+            }
             else if (element.is('label') === true) {
                 styleCheckbox(element, options_in);
             }
@@ -142,7 +145,7 @@
                     var value = $this.attr('data-value');
 
                     $select.val(value).change();
-                    
+
                     var new_current = orig_options.filter('[value="' + value + '"]');
                     setCurrent(new_current);
 
@@ -183,7 +186,7 @@
 
                 // append to DOM
                 sel_el.append(toggle);
-                
+
                 $select.after(sel_el);
 
                 options_outer.css({
@@ -266,7 +269,7 @@
                 }
             }
 
-            function setClass() {
+            function setSelectedRadio() {
                 if (isRadio) {
                     var name = control.attr('name');
                     if (name !== undefined) {
@@ -276,7 +279,10 @@
                         }
                     }
                 }
+                setClass();
+            }
 
+            function setClass() {
                 if (control.is(':checked')) {
                     label.addClass(options.classNameChecked);
                 }
@@ -288,7 +294,7 @@
             setClass();
 
             control.bind('change', function () {
-                setClass();
+                setSelectedRadio();
             });
         }
     };
