@@ -40,6 +40,11 @@
     .open .sz-toggle {
         background:#fff;
     }
+    .disabled .sz-toggle {
+        background:#fff;
+        border:1px solid #ccc;
+        color: #a6a6a6;
+    }
         .arrow {
             border-left: 4px solid transparent;
             border-right: 4px solid transparent;
@@ -50,6 +55,9 @@
         }
         .sz-toggle:hover .arrow {
             border-top-color:#333;
+        }
+        .disabled .sz-toggle:hover .arrow {
+            border-top-color:#aaa;
         }
 .sz-options-outer {
     position: relative;

@@ -79,6 +79,26 @@
                 </select>
             </div>
 
+            <div>
+                <p>Disabled:</p>
+                <select name="select-disabled" class="example3" disabled="disabled">
+                    <option value="One">Not selected 1</option>
+                    <option value="Two" selected="selected">Selected option</option>
+                    <option value="Three">Not selected 2</option>
+                </select>
+            </div>
+
+            <div>
+                <p>Dynamically disabled:</p>
+                <select name="select-disabled-dynamically" class="example4">
+                    <option value="One">Not selected 1</option>
+                    <option value="Two">Selected option</option>
+                    <option value="Three">Not selected 2</option>
+                </select>
+                <button id="select-disable-dynamically">Disable</button>
+                <button id="select-enable-dynamically">Enable</button>
+            </div>
+
             <h3>Synchronized dropdowns</h3>
 
             <div>
@@ -134,6 +154,16 @@
                 </select>
             </div>
 
+            <div>
+                <p>Disabled will also be synced:</p>
+                <select name="select-6" class="example" disabled="disabled">
+                    <option value="One">One</option>
+                    <option value="Two">Two</option>
+                    <option value="Three" selected="selected">Three</option>
+                    <option value="four">Quattro!</option>
+                </select>
+            </div>
+
             <h3>Works with overflow:hidden;</h3>
             <div style="background:#ddd; padding:10px; overflow:hidden;">
                 <select class="example2">
@@ -158,10 +188,35 @@
                 <label for="check-1">Non-styled checkbox</label>
             </div>
             <div>
+                <input id="check-2" type="checkbox" disabled="disabled" />
+                <label for="check-2">Non-styled disabled checkbox</label>
+            </div>
+            <div>
+                <input id="check-3" type="checkbox" disabled="disabled" checked="checked" />
+                <label for="check-3">Non-styled disabled checked checkbox</label>
+            </div>
+            <div>
                 <label id="label-1">
                     <input type="checkbox" /> It's a checkbox
                 </label>
             </div>
+            <div>
+                <label id="label-2">
+                    <input type="checkbox" checked="checked" /> This is already checked
+                </label>
+            </div>
+            <div>
+                <label id="label-3">
+                    <input type="checkbox" disabled="disabled" /> This is unchecked and disabled
+                </label>
+            </div>
+            <div>
+                <label id="label-4">
+                    <input type="checkbox" checked="checked" disabled="disabled" /> This is checked and disabled
+                </label>
+            </div>
+            
+            <br />
 
             <div>
                 <label class="radio">
@@ -169,6 +224,18 @@
                 </label>
                 <label class="radio">
                     <input name="radios" type="radio" /> Radio gu gu
+                </label>
+            </div>
+
+            <div>
+                <label class="radio2">
+                    <input name="radios2" type="radio" checked="checked" disabled="disabled" /> Foo
+                </label>
+                <label class="radio2">
+                    <input name="radios2" type="radio" disabled="disabled" /> Bar
+                </label>
+                <label class="radio2">
+                    <input name="radios2" type="radio" /> Huoh
                 </label>
             </div>
         </div>
@@ -184,10 +251,27 @@
         examples.syncSelections();
 
         $('.example2').selectionz()
+        $('.example3').selectionz()
+        $('.example4').selectionz()
 
         $('#check-1').selectionz();
+        $('#check-2').selectionz();
+        $('#check-3').selectionz();
+
         $('#label-1').selectionz();
+        $('#label-2').selectionz();
+        $('#label-3').selectionz();
+        $('#label-4').selectionz();
+
         $('.radio').selectionz();
+        $('.radio2').selectionz();
+        
+        $('#select-disable-dynamically').click(function () {
+            $('.example4').trigger('disable.selectionz');
+        });
+        $('#select-enable-dynamically').click(function () {
+            $('.example4').trigger('enable.selectionz');
+        });
     </script>
 
 </body>
