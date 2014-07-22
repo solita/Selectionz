@@ -1,5 +1,5 @@
 /*!
- * jQuery Selectionz v0.3.1
+ * jQuery Selectionz v0.3.2
  * Copyright (c) 2012 Antti-Jussi Kovalainen (ajk.im)
  */
 
@@ -78,12 +78,20 @@
             createElements();
             hookEvents();
 
+            if ($select.is(':disabled')) {
+                $select.trigger('disable.selectionz');
+            }
+
             allSelects.push(sel_el);
             sel_el.attr('tabindex', allSelects.length);
 
             var zindex = 1;
 
             function openDropdown() {
+                if ($select.is(':disabled')) {
+                    return;
+                }
+
                 //options_outer.toggle();
                 sel_el.toggleClass('open');
 
@@ -127,6 +135,17 @@
                     var new_current = orig_options.filter('[value="' + value + '"]');
                     setCurrent(new_current);
                 });
+
+                $select
+                    .bind('disable.selectionz', function () {
+                        $select.attr('disabled', 'disabled');
+                        sel_el.addClass('disabled');
+                        closeDropdown();
+                    })
+                    .bind('enable.selectionz', function () {
+                        $select.removeAttr('disabled');
+                        sel_el.removeClass('disabled');
+                    });
 
                 sel_el
                     .bind('focus.selectionz', function () {
