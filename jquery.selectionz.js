@@ -8,6 +8,7 @@
     var allSelects = [];
     var radios = {};
     var dropdown = $('<div id="sz-dropdown" />');
+    var IE = navigator.userAgent.match(/msie/i);
 
     function showDropdown(x, y, min_width, options) {
         dropdown.css({
@@ -140,7 +141,7 @@
 
             function bindOptions(options) {
                 /* Use mousedown for IE, because the element is hidden (because of 'blur') before click goes thru on IE */
-                options.unbind(($.browser.msie ? 'mousedown' : 'click')).bind(($.browser.msie ? 'mousedown' : 'click'), function () {
+                options.unbind((IE ? 'mousedown' : 'click')).bind((IE ? 'mousedown' : 'click'), function () {
                     var $this = $(this);
                     var value = $this.attr('data-value');
 
